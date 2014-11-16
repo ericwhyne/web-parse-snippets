@@ -1,0 +1,27 @@
+#!/usr/bin/python
+import nltk.tag.stanford 
+import re
+import fileinput
+
+stanford_NER_dir = 'stanford-ner-2014-06-16'
+st = nltk.tag.stanford.NERTagger(stanford_NER_dir + '/classifiers/english.all.3class.distsim.crf.ser.gz', stanford_NER_dir + '/stanford-ner.jar', encoding='utf-8') 
+tags = []
+entities = []
+for line in fileinput.input():
+  linetags = st.tag(line.split())
+  tags.extend(linetags)
+  lastcat = ''
+  entity = ''
+  for linetag in linetags:
+    if linetag[1] != 'O':
+      print "word: " + linetag[0] + " category: " + linetag[1]
+    if lastcat == linetag[1]: #if adjacent categories are the same, append together the words
+      entity = entity + ' ' + linetag[0]
+    else: #this category is different now, start a new entity and write out the old
+      if lastcat != 'O':
+        if entity:
+          entities.append(entity)
+          print "Entity: " + entity
+      entity = linetag[0]
+    lastcat = linetag[1]
+

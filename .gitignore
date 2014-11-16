@@ -1,0 +1,3 @@
+tmp/*
+ner/stanford-ner*
+*.pyc

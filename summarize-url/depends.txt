@@ -1,3 +1,0 @@
-sudo apt-get install python-nltk
-sudo perl -pi -e 's#DEFAULT_URL = .*#DEFAULT_URL = "http://nltk.github.com/nltk_data/"#' /usr/lib/python2.7/dist-packages/nltk/downloader.py
-sudo python -m nltk.downloader -d /usr/share/nltk_data all
