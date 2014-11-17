@@ -4,7 +4,10 @@ import json
 import re
 import obsess
 
-subreddit_url = "http://api.reddit.com/r/ebola"
+#subreddit_url = "http://api.reddit.com/r/ebola"
+#subreddit_url = "http://api.reddit.com/r/ebola/new/"
+subreddit_url = "http://api.reddit.com/r/EbolaNewsBot/"
+
 mediawiki_account_config = '/home/eric/.ssh/ebola-robot.json'
 
 mediawiki_account = json.load(open(mediawiki_account_config))
@@ -26,7 +29,7 @@ else:
     url = listing[u'data'][u'url']
     domain = listing[u'data'][u'domain']
     permalink = 'http://reddit.com' + listing[u'data'][u'permalink']
-    print title
+    print "\n\n*****************\n" + title
     title_entities = obsess.extract_entities(title)
     #print title_entities
     for record in title_entities:

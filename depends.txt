@@ -10,3 +10,7 @@ cd tmp
 wget http://nlp.stanford.edu/software/stanford-ner-2014-06-16.zip
 unzip stanford-ner-2014-06-16.zip
 mv stanford-ner-2014-06-16 ../ner/
+
+# webarticle2text 
+sudo apt-get install libtidy-0.99-0
+pip install webarticle2text
