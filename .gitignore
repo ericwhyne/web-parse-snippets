@@ -1,3 +1,4 @@
 tmp/*
 ner/stanford-ner*
 *.pyc
+*.zip
