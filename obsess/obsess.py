@@ -3,12 +3,23 @@ import nltk.tag.stanford
 import re
 import mwclient
 import sys
+import json
+
+known_entities_file = "known_entities.json"
+
+def known_entities():
+  ke = json.load(open(known_entities_file))
+  return ke
 
 def extract_entities(text):
   st = nltk.tag.stanford.NERTagger('lib/english.all.3class.distsim.crf.ser.gz', 'lib/stanford-ner.jar', encoding='utf-8')
   tags = []
   entities = []
   text = re.sub('\n','',text)
+  for entity in known_entities(): # bag the entities that the model stinks at finding
+    if entity['entity'] in text:
+      #entities.append(entity)
+      print "**************APPENDED " + entity
   linetags = st.tag(text.split())
   tags.extend(linetags)
   lastcat = ''
@@ -30,7 +41,7 @@ def extract_entities(text):
   return entities
 
 
-def mediawiki_update(pname, mwuniquething, create, append, mwaccount):
+def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount):
   # pname - the page name
   # mwuniquething - if this string is on the mwpage, the content will not be added (eg: url)
   # create - what to add if the page doesn't already exist
@@ -52,6 +63,7 @@ def mediawiki_update(pname, mwuniquething, create, append, mwaccount):
     print "This article was already on the page. Ignoring"
   else:
     print "Proposed new page content:\n----------------------------\n" + newpagetxt + "\n-----------------------------------\n"
+    print pname + " - " + etype
     if query_yes_no("Edit the page?"):
       print "Editing the page"
       page.save(newpagetxt, summary='automated update')

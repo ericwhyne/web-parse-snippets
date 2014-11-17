@@ -4,9 +4,9 @@ import json
 import re
 import obsess
 
-#subreddit_url = "http://api.reddit.com/r/ebola"
+subreddit_url = "http://api.reddit.com/r/ebola"
 #subreddit_url = "http://api.reddit.com/r/ebola/new/"
-subreddit_url = "http://api.reddit.com/r/EbolaNewsBot/"
+#subreddit_url = "http://api.reddit.com/r/EbolaNewsBot/"
 
 mediawiki_account_config = '/home/eric/.ssh/ebola-robot.json'
 
@@ -40,15 +40,15 @@ else:
         gmaps_url = 'http://maps.google.com/?q=' + re.sub(' ','+', record[u'entity'])
         create = "[[category:locations]]\nView in google maps: " + gmaps_url + "\n"
         append = "\n\n\n" + title + "\n* " + url + "\n* Source: [[" + domain + "]] \n" + "* [" + permalink + " Discus on Reddit]\n\n"
-        obsess.mediawiki_update(normalized_entity_name, mwuniquething, create, append, mediawiki_account)
+        obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
       elif record[u'type'] == 'PERSON':
         create = "[[category:people]]\n"
         append = "\n\n\n" + title + "\n* " + url + "\n* Source: [[" + domain + "]]\n" + "* [" + permalink + " Discus on Reddit]\n\n"
-        obsess.mediawiki_update(normalized_entity_name, mwuniquething, create, append, mediawiki_account)
+        obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
       elif record[u'type'] == 'ORGANIZATION':
         create = "[[category:organizations]]\n"
         append = "\n\n\n" + title + "\n* " + url + "\n* Source: [[" + domain + "]] \n" + "* [" + permalink + " Discus on Reddit]\n\n"
-        obsess.mediawiki_update(normalized_entity_name, mwuniquething, create, append, mediawiki_account)
+        obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
 
 
 

@@ -1,4 +1,4 @@
-sudo apt-get -Y install python-nltk
+sudo apt-get -y install python-nltk
 sudo perl -pi -e 's#DEFAULT_URL = .*#DEFAULT_URL = "http://nltk.github.com/nltk_data/"#' /usr/lib/python2.7/dist-packages/nltk/downloader.py
 sudo python -m nltk.downloader -d /usr/share/nltk_data all
 
@@ -10,7 +10,9 @@ cd tmp
 wget http://nlp.stanford.edu/software/stanford-ner-2014-06-16.zip
 unzip stanford-ner-2014-06-16.zip
 mv stanford-ner-2014-06-16 ../ner/
+# The standford nltk modules are not in the python-nltk apt package; upgrade through pip.
+sudo pip install --upgrade nltk
 
-# webarticle2text 
+# webarticle2text
 sudo apt-get install libtidy-0.99-0
 pip install webarticle2text
