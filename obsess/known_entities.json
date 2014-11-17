@@ -1,2 +1,15 @@
 [{"entity":"Doctors Without Borders","type":"ORGANIZATION"},
-{"entity":"DR Congo", "type":"LOCATION"}]
+{"entity":"DR Congo", "type":"LOCATION"},
+{"entity":"Kailahun", "type":"LOCATION"},
+{"entity":"Tonkolili", "type":"LOCATION"},
+{"entity":"Kenema", "type":"LOCATION"},
+{"entity":"Kono", "type":"LOCATION"},
+{"entity":"Bombali", "type":"LOCATION"},
+{"entity":"Kambia", "type":"LOCATION"},
+{"entity":"Koinadugu", "type":"LOCATION"},
+{"entity":"Port Loko", "type":"LOCATION"},
+{"entity":"Tonkolili", "type":"LOCATION"},
+{"entity":"Bonthev", "type":"LOCATION"},
+{"entity":"Moyamba", "type":"LOCATION"},
+{"entity":"Pujehun","type":"LOCATION"},
+{"entity":"European Union","type":"ORGANIZATION"}]

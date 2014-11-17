@@ -1,0 +1,13 @@
+#!/usr/bin/python
+from goose import Goose
+import sys
+import codecs
+sys.stdout=codecs.getwriter('utf-8')(sys.stdout)
+
+#url = 'http://edition.cnn.com/2012/02/22/world/europe/uk-occupy-london/index.html?hpt=ieu_c2'
+url = sys.argv[1]
+g = Goose()
+article = g.extract(url=url)
+print "Title: " + article.title
+print article.cleaned_text
+

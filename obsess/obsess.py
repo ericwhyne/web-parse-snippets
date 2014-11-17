@@ -6,38 +6,39 @@ import sys
 import json
 
 known_entities_file = "known_entities.json"
+known_bad_entities_file = "known_bad_entities.json"
 
 def known_entities():
   ke = json.load(open(known_entities_file))
   return ke
+def known_bad_entities():
+  kbe = json.load(open(known_bad_entities_file))
+  return kbe
 
 def extract_entities(text):
   st = nltk.tag.stanford.NERTagger('lib/english.all.3class.distsim.crf.ser.gz', 'lib/stanford-ner.jar', encoding='utf-8')
   tags = []
   entities = []
-  text = re.sub('\n','',text)
-  for entity in known_entities(): # bag the entities that the model stinks at finding
-    if entity['entity'] in text:
-      #entities.append(entity)
-      print "**************APPENDED " + entity
-  linetags = st.tag(text.split())
-  tags.extend(linetags)
-  lastcat = ''
-  entity = ''
-  for linetag in linetags:
-    #if linetag[1] != 'O':
-      #print "word: " + linetag[0] + " category: " + linetag[1]
-    if lastcat == linetag[1]: #if adjacent categories are the same, append together the words
-      entity = entity + ' ' + linetag[0]
-    else: #this category is different now, start a new entity and write out the old
-      if lastcat != 'O':
-        if entity:
-          entity_record = {u'entity': entity, u'type': lastcat}
-          entities.append(entity_record)
-          #print entity_record
-          #print "Entity: " + entity + " Type: " + lastcat
-      entity = linetag[0]
-    lastcat = linetag[1]
+  lines = text.split('\n')
+  for line in lines:
+    for entity in known_entities(): # bag the entities that the model stinks at finding
+      if entity['entity'] in line:
+        entities.append(entity)
+    linetags = st.tag(line.split())
+    tags.extend(linetags)
+    lastcat = ''
+    entity = ''
+    for linetag in linetags:
+      if lastcat == linetag[1]: #if adjacent categories are the same, append together the words
+        entity = entity + ' ' + linetag[0]
+      else: #this category is different now, start a new entity and write out the old
+        if lastcat != 'O':
+          if entity:
+            entity_record = {u'entity': entity, u'type': lastcat}
+            if entity_record not in known_bad_entities:
+              entities.append(entity_record)
+        entity = linetag[0]
+      lastcat = linetag[1]
   return entities
 
 
@@ -52,11 +53,14 @@ def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount):
   oldpagetxt = page.text()
   newpagetxt = ""
   if page.text() == "":
-    print "There is no page for " + pname
-    newpagetxt = create + append
+    print "++++ There is no page for " + pname
+    newpagetxt = create + "\n\n==Recent News==\n\n" + append
   else:
-    print "A page exists for " + pname
-    newpagetxt = oldpagetxt + append
+    print "++++ A page exists for " + pname
+    if '==Recent News==' in oldpagetxt:
+      newpagetxt = re.sub(re.escape('==Recent News=='),'==Recent News==' + append,oldpagetxt)
+    else:
+      newpagetxt = oldpagetxt + "\n\n==Recent News==\n\n" + append
   print "Checking page for: " + mwuniquething
   #if re.match('.*' + re.escape(mwuniquething) + '.*', page.text()):
   if mwuniquething in oldpagetxt:
