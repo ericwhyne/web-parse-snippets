@@ -7,5 +7,10 @@
 {"entity":"Rwandan","type":"LOCATION"},
 {"entity":"Sierra Leonean","type":"LOCATION"},
 {"entity":"United Methodist News","type":"ORGANIZATION"},
+{"entity":"Ebola Outbreak","type":"ORGANIZATION"},
+{"entity":"Ebola Treatment","type":"ORGANIZATION"},
+{"entity":"Ebola Pandemic","type":"ORGANIZATION"},
+{"entity":"Ebola Survival Guide","type":"ORGANIZATION"},
 {"entity":"House","type":"ORGANIZATION"},
-{"entity":"Sierre Leone","type":"PERSON"}]
+{"entity":"Sierre Leone","type":"PERSON"},
+{"entity":"Duncan Tx Ebola","type":"PERSON"}]

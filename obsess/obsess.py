@@ -28,6 +28,8 @@ class bcolors:
     FAIL = '\033[91m'
     ENDC = '\033[0m'
 
+type_to_category = {"LOCATION":"[[category:locations]]","PERSON":"[[category:people]]","ORGANIZATION":"[[category:organizations]]"}
+
 def known_entities():
   ke = json.load(open(known_entities_file))
   return ke
@@ -37,6 +39,22 @@ def stanford_known_bad_entities():
 def mitie_known_bad_entities():
   kbe = json.load(open(mitie_known_bad_entities_file))
   return kbe
+
+def log_data(record, filename):
+  if os.path.exists(filename):
+    logfile = open(filename, 'r')
+    records = json.load(logfile)
+    logfile.close()
+    records.append(record)
+    print records
+    logfile = open(filename, 'w')
+    json.dump(records, logfile)
+    logfile.close()
+  else:
+    records = [record]
+    logfile = open(filename, 'w')
+    json.dump(records, logfile)
+    logfile.close()
 
 def mitie_extract_entities(text):
   entities = []
@@ -75,12 +93,12 @@ def stanford_extract_entities(text):
   return entities
 
 def known_extract_entities(text):
+  #TODO: convert text to ascii
   entities = []
   for entity in known_entities(): # bag the entities that the model stinks at finding
     if entity['entity'] in text:
       entities.append(entity)
   return entities
-
 
 def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount):
   # pname - the page name
@@ -99,7 +117,8 @@ def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount):
   else:
     if '==Recent News==' in oldpagetxt: # A page exists for " + pname
       newpagetxt = re.sub(re.escape('==Recent News=='),'==Recent News==' + append,oldpagetxt)
-      #ask_before_edit = "false" TODO: Need to verify that the correct category tag is on page before doing this
+      if type_to_category[etype] in oldpagetxt:
+        ask_before_edit = "false" # Just make the update if the page of correct type cateogry already exists
     else:
       newpagetxt = oldpagetxt + "\n\n==Recent News==\n\n" + append
   #print "Checking page for: " + mwuniquething
@@ -107,25 +126,18 @@ def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount):
   if mwuniquething in oldpagetxt:
     print "This article was already on the page. Ignoring\n\n"
   else:
+    print "Proposed update: \n" + append + "\n\n"
     if ask_before_edit == "false":
       print bcolors.WARNING + "Unsupervised edit! " + pname + " as " + etype + bcolors.ENDC
       page.save(newpagetxt, summary='automated update')
     else:
-      print "Proposed update: \n" + append
       print "\n\nis " + pname + " a " + etype + "?"
       if query_yes_no(bcolors.OKBLUE + "Edit the page?" + bcolors.ENDC):
         print "Editing the page"
         page.save(newpagetxt, summary='automated update')
 
 def query_yes_no(question, default="yes"):
-    """Ask a yes/no question via raw_input() and return their answer.
-    "question" is a string that is presented to the user.
-    "default" is the presumed answer if the user just hits <Enter>.
-        It must be "yes" (the default), "no" or None (meaning
-        an answer is required of the user).
-
-    The "answer" return value is one of "yes" or "no".
-    """
+    """Ask a yes/no question via raw_input() and return their answer."""
     valid = {"yes": True, "y": True, "ye": True,
              "no": False, "n": False}
     if default is None:
@@ -136,7 +148,6 @@ def query_yes_no(question, default="yes"):
         prompt = " [y/N] "
     else:
         raise ValueError("invalid default answer: '%s'" % default)
-
     while True:
         sys.stdout.write(question + prompt)
         choice = raw_input().lower()
