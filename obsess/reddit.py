@@ -5,6 +5,7 @@ import re
 from goose import Goose
 import summarize
 import obsess
+from collections import defaultdict
 
 subreddit_url = "http://api.reddit.com/r/ebola"
 #subreddit_url = "http://api.reddit.com/r/ebola/new/"
@@ -13,7 +14,7 @@ subreddit_url = "http://api.reddit.com/r/ebola"
 mediawiki_account_config = '/home/eric/.ssh/ebola-robot.json'
 
 mediawiki_account = json.load(open(mediawiki_account_config))
-
+ss = summarize.SimpleSummarizer()
 
 headers = { 'User-Agent' : 'ObsessBot/alphadev' } # reddit heavily throttles default user agents
 req = urllib2.Request(subreddit_url, None, headers)
@@ -32,17 +33,34 @@ else:
     domain = listing[u'data'][u'domain']
     permalink = 'http://reddit.com' + listing[u'data'][u'permalink']
     print "\n\n*****************\n" + title
-    print "Tagging title..."
-    title_entities = obsess.stanford_extract_entities(title)
-    print title_entities
+    print "Extracting article text..."
     g = Goose()
     article = g.extract(url=url)
-    print "Tagging article..."
-    article_entities = obsess.stanford_extract_entities(article.cleaned_text)
-    ss = summarize.SimpleSummarizer()
-    all_entities = title_entities + article_entities #TODO: this will still have duplicates. It's only ineffecient but deduped below.
 
+    print "Tagging - Stanford NER..."
+    stanford_title_entities = obsess.stanford_extract_entities(title)
+    stanford_article_entities = obsess.stanford_extract_entities(article.cleaned_text)
+    print stanford_title_entities
+    print stanford_article_entities
+
+
+    print "Tagging article - MITIE..."
+    #mitie_title_entities = obsess.mitie_extract_entities(title)
+    #mitie_article_entities = obsess.mitie_extract_entities(article.cleaned_text)
+    #print mitie_title_entities
+    #print mitie_article_entities
+
+
+    print "Tagging article - known..."
+    known_title_entities = obsess.known_extract_entities(title)
+    known_article_entities = obsess.known_extract_entities(article.cleaned_text)
+    print known_title_entities
+    print known_article_entities
+
+    #TODO: this will still have duplicates. It's only ineffecient but deduped below.
+    all_entities = known_title_entities + known_article_entities + stanford_title_entities + stanford_article_entities # + mitie_title_entities + mitie_article_entities
     print "All entities: " + str(all_entities)
+
     for record in all_entities:
       print "Generating article summary for entity " + record[u'entity'] + " - " + record[u'type']
       article_summary = ss.summarize(article.cleaned_text, 4, record[u'entity'])

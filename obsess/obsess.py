@@ -13,17 +13,29 @@ import mitie
 
 # Configurations
 known_entities_file = "known_entities.json"
-known_bad_entities_file = "known_bad_entities.json"
+stanford_known_bad_entities_file = "stanford_known_bad_entities.json"
+mitie_known_bad_entities_file = "mitie_known_bad_entities.json"
 
 # Load models
 st = nltk.tag.stanford.NERTagger('lib/english.all.3class.distsim.crf.ser.gz', 'lib/stanford-ner.jar', encoding='utf-8')
 mt = mitie.named_entity_extractor('lib/MITIE/english/ner_model.dat')
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+
 def known_entities():
   ke = json.load(open(known_entities_file))
   return ke
-def known_bad_entities():
-  kbe = json.load(open(known_bad_entities_file))
+def stanford_known_bad_entities():
+  kbe = json.load(open(stanford_known_bad_entities_file))
+  return kbe
+def mitie_known_bad_entities():
+  kbe = json.load(open(mitie_known_bad_entities_file))
   return kbe
 
 def mitie_extract_entities(text):
@@ -34,8 +46,9 @@ def mitie_extract_entities(text):
       range = e[0]
       tag = e[1]
       entity_text = " ".join(tokens[i] for i in range)
-      print "    " + tag + ": " + entity_text
-
+      entity_record = {u'entity': entity_text, u'type': tag}
+      if entity_record not in mitie_known_bad_entities():
+        entities.append(entity_record)
   return entities
 
 def stanford_extract_entities(text):
@@ -44,9 +57,6 @@ def stanford_extract_entities(text):
   entities = []
   lines = text.split('\n')
   for line in lines:
-    for entity in known_entities(): # bag the entities that the model stinks at finding
-      if entity['entity'] in line:
-        entities.append(entity)
     linetags = st.tag(line.split())
     tags.extend(linetags)
     lastcat = ''
@@ -58,10 +68,17 @@ def stanford_extract_entities(text):
         if lastcat != 'O':
           if entity:
             entity_record = {u'entity': entity, u'type': lastcat}
-            if entity_record not in known_bad_entities():
+            if entity_record not in stanford_known_bad_entities():
               entities.append(entity_record)
         entity = linetag[0]
       lastcat = linetag[1]
+  return entities
+
+def known_extract_entities(text):
+  entities = []
+  for entity in known_entities(): # bag the entities that the model stinks at finding
+    if entity['entity'] in text:
+      entities.append(entity)
   return entities
 
 
@@ -75,25 +92,30 @@ def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount):
   page = mwsite.Pages[pname]
   oldpagetxt = page.text()
   newpagetxt = ""
+  ask_before_edit = "true"
   if page.text() == "":
-    print "++++ There is no page for " + pname
+    #print "++++ There is no page for " + pname
     newpagetxt = create + "\n\n==Recent News==\n\n" + append
   else:
-    print "++++ A page exists for " + pname
-    if '==Recent News==' in oldpagetxt:
+    if '==Recent News==' in oldpagetxt: # A page exists for " + pname
       newpagetxt = re.sub(re.escape('==Recent News=='),'==Recent News==' + append,oldpagetxt)
+      #ask_before_edit = "false" TODO: Need to verify that the correct category tag is on page before doing this
     else:
       newpagetxt = oldpagetxt + "\n\n==Recent News==\n\n" + append
-  print "Checking page for: " + mwuniquething
+  #print "Checking page for: " + mwuniquething
   #if re.match('.*' + re.escape(mwuniquething) + '.*', page.text()):
   if mwuniquething in oldpagetxt:
-    print "This article was already on the page. Ignoring"
+    print "This article was already on the page. Ignoring\n\n"
   else:
-    print "Proposed new page content:\n----------------------------\n" + newpagetxt + "\n-----------------------------------\n"
-    print pname + " - " + etype
-    if query_yes_no("Edit the page?"):
-      print "Editing the page"
+    if ask_before_edit == "false":
+      print bcolors.WARNING + "Unsupervised edit! " + pname + " as " + etype + bcolors.ENDC
       page.save(newpagetxt, summary='automated update')
+    else:
+      print "Proposed update: \n" + append
+      print "\n\nis " + pname + " a " + etype + "?"
+      if query_yes_no(bcolors.OKBLUE + "Edit the page?" + bcolors.ENDC):
+        print "Editing the page"
+        page.save(newpagetxt, summary='automated update')
 
 def query_yes_no(question, default="yes"):
     """Ask a yes/no question via raw_input() and return their answer.
