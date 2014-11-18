@@ -33,14 +33,15 @@ else:
     permalink = 'http://reddit.com' + listing[u'data'][u'permalink']
     print "\n\n*****************\n" + title
     print "Tagging title..."
-    title_entities = obsess.extract_entities(title)
+    title_entities = obsess.stanford_extract_entities(title)
     print title_entities
     g = Goose()
     article = g.extract(url=url)
     print "Tagging article..."
-    article_entities = obsess.extract_entities(article.cleaned_text)
+    article_entities = obsess.stanford_extract_entities(article.cleaned_text)
     ss = summarize.SimpleSummarizer()
     all_entities = title_entities + article_entities #TODO: this will still have duplicates. It's only ineffecient but deduped below.
+
     print "All entities: " + str(all_entities)
     for record in all_entities:
       print "Generating article summary for entity " + record[u'entity'] + " - " + record[u'type']

@@ -2,4 +2,8 @@
 {"entity":"Bo","type":"PERSON"},
 {"entity":"Pujehun","type":"ORGANIZATION"},
 {"entity":"European Union","type":"LOCATION"},
-{"entity":"Ebola","type":"LOCATION"}]
+{"entity":"Ebola","type":"LOCATION"},
+{"entity":"Rwandan","type":"LOCATION"},
+{"entity":"Sierra Leonean","type":"LOCATION"},
+{"entity":"United Methodist News","type":"ORGANIZATION"},
+{"entity":"Sierre Leone","type":"PERSON"}]

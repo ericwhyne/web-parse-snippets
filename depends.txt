@@ -16,11 +16,14 @@ mv stanford-ner-2014-06-16 ../ner/
 # goose extractor
 git clone https://github.com/grangier/python-goose.git
 cd python-goose
-pip install -r requirements.txt
-python setup.py install
+sudo pip install -r requirements.txt
+sudo python setup.py install
+# goose has a bug. fixed it by doing this:
+# eric@glamdring:/usr/local/lib/python2.7/dist-packages/goose_extractor-1.0.22-py2.7.egg/goose/resources/text$ sudo cp stopwords-en.txt stopwords-un.txt
 cd ..
 
 cd ..
 
 # The standford nltk modules are not in the python-nltk apt package; upgrade through pip.
 sudo pip install --upgrade nltk
+

@@ -5,8 +5,19 @@ import mwclient
 import sys
 import json
 
+# Next 4 lines are for MITIE
+import os
+parent = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(parent + '/lib/MITIE/mitielib')
+import mitie
+
+# Configurations
 known_entities_file = "known_entities.json"
 known_bad_entities_file = "known_bad_entities.json"
+
+# Load models
+st = nltk.tag.stanford.NERTagger('lib/english.all.3class.distsim.crf.ser.gz', 'lib/stanford-ner.jar', encoding='utf-8')
+mt = mitie.named_entity_extractor('lib/MITIE/english/ner_model.dat')
 
 def known_entities():
   ke = json.load(open(known_entities_file))
@@ -15,8 +26,20 @@ def known_bad_entities():
   kbe = json.load(open(known_bad_entities_file))
   return kbe
 
-def extract_entities(text):
-  st = nltk.tag.stanford.NERTagger('lib/english.all.3class.distsim.crf.ser.gz', 'lib/stanford-ner.jar', encoding='utf-8')
+def mitie_extract_entities(text):
+  entities = []
+  tokens = mitie.tokenize(text)
+  mitie_entities = mt.extract_entities(tokens)
+  for e in mitie_entities:
+      range = e[0]
+      tag = e[1]
+      entity_text = " ".join(tokens[i] for i in range)
+      print "    " + tag + ": " + entity_text
+
+  return entities
+
+def stanford_extract_entities(text):
+  #TODO: make sure st loads fine as a global
   tags = []
   entities = []
   lines = text.split('\n')
@@ -35,7 +58,7 @@ def extract_entities(text):
         if lastcat != 'O':
           if entity:
             entity_record = {u'entity': entity, u'type': lastcat}
-            if entity_record not in known_bad_entities:
+            if entity_record not in known_bad_entities():
               entities.append(entity_record)
         entity = linetag[0]
       lastcat = linetag[1]

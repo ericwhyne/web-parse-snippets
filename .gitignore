@@ -1,4 +1,5 @@
 tmp/*
 ner/stanford-ner*
+obsess/lib/*
 *.pyc
 *.zip
