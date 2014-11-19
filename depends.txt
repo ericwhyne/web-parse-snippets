@@ -27,3 +27,8 @@ cd ..
 # The standford nltk modules are not in the python-nltk apt package; upgrade through pip.
 sudo pip install --upgrade nltk
 
+# PDF Miner
+cd ~/workspace
+git clone https://github.com/euske/pdfminer/
+cd ~/workspace/pdfminer
+sudo python setup.py install

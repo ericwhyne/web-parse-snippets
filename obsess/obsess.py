@@ -47,7 +47,6 @@ def log_data(record, filename):
     records = json.load(logfile)
     logfile.close()
     records.append(record)
-    print records
     logfile = open(filename, 'w')
     json.dump(records, logfile)
     logfile.close()
@@ -57,8 +56,16 @@ def log_data(record, filename):
     json.dump(records, logfile)
     logfile.close()
 
+def url_not_in_log_file(url, filename):
+  logfile = open(filename, 'r')
+  records = json.load(logfile)
+  for record in records:
+    if record["url"] == url:
+      return False
+  return True
+
 def mitie_extract_entities(text):
-  if isinstance(s, unicode):
+  if isinstance(text, unicode):
     text = unicodedata.normalize('NFKD', text).encode('ascii','ignore') # MITIE doesn't like unicode and can't set encoding yet
   entities = []
   tokens = mitie.tokenize(text)

@@ -1,1 +1,6 @@
-[{"entity":"Osama bin Laden","type":"PERSON"}]
+[{"entity":"Osama bin Laden","type":"PERSON"},
+{"entity":"Islamic State Iraq","type":"ORGANIZATION"},
+{"entity":"Media Council of the People of Tawhed","type":"ORGANIZATION"},
+{"entity":"Taliban","type":"ORGANIZATION"},
+{"entity":"Israeli forces","type":"ORGANIZATION"},
+{"entity":"Istishhadiyya","type":"PERSON"}]

@@ -46,6 +46,7 @@ else:
     print "Fetching web page..."
     req = urllib2.Request(url, None, headers)
     raw_html = urllib2.urlopen(req).read()
+    data['raw_html'] = raw_html
     soup = BeautifulSoup(raw_html)
 
     print "Extracting links..."

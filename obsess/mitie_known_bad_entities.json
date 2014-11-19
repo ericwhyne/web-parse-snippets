@@ -1,4 +1,14 @@
 [{"entity":"Ebola","type":"ORGANIZATION"},
 {"entity":"CT","type":"ORGANIZATION"},
 {"entity":"Plasma Transfusion","type":"ORGANIZATION"},
-{"entity":"ZMapp","type":"LOCATION"}]
+{"entity":"jihad","type":"ORGANIZATION"},
+{"entity":"Channel","type":"ORGANIZATION"},
+{"entity":"Comprising","type":"ORGANIZATION"},
+{"entity":"Monitoring Jihadist Online Communities","type":"ORGANIZATION"},
+{"entity":"ZMapp","type":"LOCATION"},
+{"entity":"Quran","type":"LOCATION"},
+{"entity":"Jihadica","type":"LOCATION"},
+{"entity":"mujahid","type":"PERSON"},
+{"entity":"Jihadi","type":"PERSON"},
+{"entity":"@al_nukhba","type":"PERSON"}
+]
