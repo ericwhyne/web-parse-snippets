@@ -4,6 +4,7 @@ import re
 import mwclient
 import sys
 import json
+import unicodedata
 
 # Next 4 lines are for MITIE
 import os
@@ -57,6 +58,8 @@ def log_data(record, filename):
     logfile.close()
 
 def mitie_extract_entities(text):
+  if isinstance(s, unicode):
+    text = unicodedata.normalize('NFKD', text).encode('ascii','ignore') # MITIE doesn't like unicode and can't set encoding yet
   entities = []
   tokens = mitie.tokenize(text)
   mitie_entities = mt.extract_entities(tokens)
