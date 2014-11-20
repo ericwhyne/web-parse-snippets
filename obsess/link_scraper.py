@@ -193,14 +193,13 @@ for url in urls:
           gmaps_url = 'http://maps.google.com/?q=' + re.sub(' ','+', record[u'entity'])
           create = "[[category:locations]]\nView in google maps: " + gmaps_url + "\n"
           append = "\n\n\n" + title + "\n* " + url + "\n* Summary: " + article_summary + "\n\n"
-          obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
         elif record[u'type'] == 'PERSON':
           create = "[[category:people]]\n"
           append = "\n\n\n" + title + "\n* " + url + "\n* Summary: " + article_summary + "\n\n"
-          obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
         elif record[u'type'] == 'ORGANIZATION':
           create = "[[category:organizations]]\n"
           append = "\n\n\n" + title + "\n* " + url + "\n* Summary: " + article_summary + "\n\n"
-          obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
+        # Make the update
+        obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
       else:
         print "No summary available, skipping."

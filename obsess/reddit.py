@@ -38,7 +38,6 @@ else:
     url = listing[u'data'][u'url']
     domain = listing[u'data'][u'domain']
     permalink = 'http://reddit.com' + listing[u'data'][u'permalink']
-
     data = {}
     data['url'] = url
     all_entities = []
@@ -101,12 +100,12 @@ else:
         gmaps_url = 'http://maps.google.com/?q=' + re.sub(' ','+', record[u'entity'])
         create = "[[category:locations]]\nView in google maps: " + gmaps_url + "\n"
         append = "\n\n\n" + title + "\n* " + url + "\n* Summary: " + article_summary + "\n* Source: [[" + domain + "]] \n" + "* [" + permalink + " Discus on Reddit]\n\n"
-        obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
       elif record[u'type'] == 'PERSON':
         create = "[[category:people]]\n"
         append = "\n\n\n" + title + "\n* " + url + "\n* Summary: " + article_summary + "\n* Source: [[" + domain + "]]\n" + "* [" + permalink + " Discus on Reddit]\n\n"
-        obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
       elif record[u'type'] == 'ORGANIZATION':
         create = "[[category:organizations]]\n"
         append = "\n\n\n" + title + "\n* " + url + "\n* Summary: " + article_summary + "\n* Source: [[" + domain + "]] \n" + "* [" + permalink + " Discus on Reddit]\n\n"
-        obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
+      obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
+      #TODO: create record and log this
+      #obsess.log_data(record, change)
