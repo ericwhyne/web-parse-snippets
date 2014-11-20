@@ -7,17 +7,19 @@ import summarize
 import obsess
 from collections import defaultdict
 from bs4 import BeautifulSoup
+import base64
 
-subreddit_url = "http://api.reddit.com/r/ebola"
+#subreddit_url = "http://api.reddit.com/r/ebola"
 #subreddit_url = "http://api.reddit.com/r/EbolaNewsBot/"
 #subreddit_url = "http://api.reddit.com/r/EbolaGooglers"
 #subreddit_url = "http://api.reddit.com/r/ebolasurvival"
-#subreddit_url = "http://api.reddit.com/r/ebolawestafrica"
+subreddit_url = "http://api.reddit.com/r/ebolawestafrica"
 #subreddit_url = "http://api.reddit.com/r/ebolaUS
 
 
 mediawiki_account_config = '/home/eric/.ssh/ebola-robot.json'
 data_logfilename = 'ebola_scrape.json'
+proposed_change_filename = 'ebola_wiki_proposed_changes.json'
 
 mediawiki_account = json.load(open(mediawiki_account_config))
 ss = summarize.SimpleSummarizer()
@@ -34,6 +36,8 @@ if re.match('^{\"error.*', text):
 else:
   #for key in records.keys():
   for listing in records[u'data'][u'children']:
+   url = listing[u'data'][u'url']
+   if obsess.url_not_in_log_file(url, data_logfilename):
     title = listing[u'data'][u'title']
     url = listing[u'data'][u'url']
     domain = listing[u'data'][u'domain']
@@ -42,9 +46,12 @@ else:
     data['url'] = url
     all_entities = []
     print "\n\n*****************\n"
-    print "Fetching web page..."
+    print "Fetching web page: " + url
     req = urllib2.Request(url, None, headers)
     raw_html = urllib2.urlopen(req).read()
+    http_message = req.info()
+    full = http_message.type # 'text/plain'
+    main = http_message.maintype # 'text'
     data['raw_html'] = raw_html
     soup = BeautifulSoup(raw_html)
 
@@ -96,16 +103,22 @@ else:
       print "Summary: " + article_summary + "\n\n"
       normalized_entity_name = re.sub('\.','',record[u'entity']) #remove periods from acronyms and names to be consistent
       mwuniquething = url # if this thing already exists on the mwpage, the content will not be appended
+      valid = False
       if record[u'type'] == 'LOCATION':
         gmaps_url = 'http://maps.google.com/?q=' + re.sub(' ','+', record[u'entity'])
         create = "[[category:locations]]\nView in google maps: " + gmaps_url + "\n"
         append = "\n\n\n" + title + "\n* " + url + "\n* Summary: " + article_summary + "\n* Source: [[" + domain + "]] \n" + "* [" + permalink + " Discus on Reddit]\n\n"
+        valid = True
       elif record[u'type'] == 'PERSON':
         create = "[[category:people]]\n"
         append = "\n\n\n" + title + "\n* " + url + "\n* Summary: " + article_summary + "\n* Source: [[" + domain + "]]\n" + "* [" + permalink + " Discus on Reddit]\n\n"
+        valid = True
       elif record[u'type'] == 'ORGANIZATION':
         create = "[[category:organizations]]\n"
         append = "\n\n\n" + title + "\n* " + url + "\n* Summary: " + article_summary + "\n* Source: [[" + domain + "]] \n" + "* [" + permalink + " Discus on Reddit]\n\n"
-      obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
-      #TODO: create record and log this
-      #obsess.log_data(record, change)
+        valid = True
+      #obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
+      #TODO: test this
+      if valid == True:
+        proposed_change = {'name':normalized_entity_name,'type':record[u'type'],'unique_attrib':mwuniquething,'create':base64.encode(create),'append':base64.encode(append),'mwaccount':mediawiki_account}
+        obsess.log_data(proposed_change, proposed_change_filename)

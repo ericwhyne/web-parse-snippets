@@ -13,6 +13,11 @@ mwaccount = json.load(open(mediawiki_account_config))
 mwsite = mwclient.Site(mwaccount['site'], path=mwaccount['sitepath'])
 mwsite.login(mwaccount['username'],mwaccount['password'])
 
+logfile = open(filename, 'r')
+records = json.load(logfile)
+logfile.close()
+records.append(record)
+
 for page in mwsite.pages:
     record = {}
     record['title'] = page.page_title
