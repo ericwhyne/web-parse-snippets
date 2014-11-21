@@ -7,7 +7,7 @@ import summarize
 import obsess
 from collections import defaultdict
 from bs4 import BeautifulSoup
-import base64
+
 
 #subreddit_url = "http://api.reddit.com/r/ebola"
 #subreddit_url = "http://api.reddit.com/r/EbolaNewsBot/"
@@ -48,10 +48,12 @@ else:
     print "\n\n*****************\n"
     print "Fetching web page: " + url
     req = urllib2.Request(url, None, headers)
-    raw_html = urllib2.urlopen(req).read()
-    http_message = req.info()
-    full = http_message.type # 'text/plain'
-    main = http_message.maintype # 'text'
+    response = urllib2.urlopen(req)
+    raw_html = response.read()
+    content_type = response.info().getheader('Content-Type')
+    if 'text' not in content_type:
+      print "TYPE IS NOT TEXT, skipping this one " + content_type
+      continue
     data['raw_html'] = raw_html
     soup = BeautifulSoup(raw_html)
 
@@ -103,6 +105,8 @@ else:
       print "Summary: " + article_summary + "\n\n"
       normalized_entity_name = re.sub('\.','',record[u'entity']) #remove periods from acronyms and names to be consistent
       mwuniquething = url # if this thing already exists on the mwpage, the content will not be appended
+      create = ''
+      append = ''
       valid = False
       if record[u'type'] == 'LOCATION':
         gmaps_url = 'http://maps.google.com/?q=' + re.sub(' ','+', record[u'entity'])
@@ -120,5 +124,5 @@ else:
       #obsess.mediawiki_update(normalized_entity_name, record[u'type'], mwuniquething, create, append, mediawiki_account)
       #TODO: test this
       if valid == True:
-        proposed_change = {'name':normalized_entity_name,'type':record[u'type'],'unique_attrib':mwuniquething,'create':base64.encode(create),'append':base64.encode(append),'mwaccount':mediawiki_account}
+        proposed_change = {'name':normalized_entity_name,'type':record[u'type'],'unique_attrib':mwuniquething,'create':create,'append':append,'mwaccount':mediawiki_account}
         obsess.log_data(proposed_change, proposed_change_filename)

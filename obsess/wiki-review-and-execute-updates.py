@@ -1,26 +1,14 @@
 #!/usr/bin/python
-import mwclient
 import json
 import obsess
-import datetime
 
-today = datetime.date.isoformat(datetime.datetime.now())
-
-mediawiki_account_config = '/home/eric/.ssh/ebola-robot.json'
-data_logfilename = 'ebola-wiki-content-' + today + '.json'
-mwaccount = json.load(open(mediawiki_account_config))
-
-mwsite = mwclient.Site(mwaccount['site'], path=mwaccount['sitepath'])
-mwsite.login(mwaccount['username'],mwaccount['password'])
+#mediawiki_account_config = '/home/eric/.ssh/ebola-robot.json'
+filename = 'ebola_wiki_proposed_changes.json'
 
 logfile = open(filename, 'r')
 records = json.load(logfile)
 logfile.close()
-records.append(record)
 
-for page in mwsite.pages:
-    record = {}
-    record['title'] = page.page_title
-    record['text'] = page.text()
-    #print record
-    obsess.log_data(record, data_logfilename)
+#proposed_change = {'name':normalized_entity_name,'type':record[u'type'],'unique_attrib':mwuniquething,'create':create,'append':append,'mwaccount':mediawiki_account}
+for record in records:
+    obsess.mediawiki_update(record['name'], record['type'], record['unique_attrib'], record['create'], record['append'], record['mwaccount'])
