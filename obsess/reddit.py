@@ -2,11 +2,10 @@
 import urllib2
 import json
 import re
-from goose import Goose
 import summarize
 import obsess
 from collections import defaultdict
-from bs4 import BeautifulSoup
+
 #########################################################################################################################
 # Configuration
 subreddit_url = "http://api.reddit.com/r/ebola"
@@ -35,13 +34,14 @@ if re.match('^{\"error.*', text):
   print "Error: " + text
 else:
   for reddit_post in reddit_posts[u'data'][u'children']:
-   data = {} # this is the object which will collect all data and be logged for export
-   data['url'] = reddit_post[u'data'][u'url']
+    data = {} # this is the object which will collect all data and be logged for export
+    data['url'] = reddit_post[u'data'][u'url']
     if obsess.url_in_log_file(data['url'], data_logfilename):
       print "Already processed url, skipping. " + data['url']
       continue
     print "\n\n*****************\n"
-    if fetched_data = fetch_data(url): # data['raw_html'] data['content_type'] data['page_links'] data['title'] data['cleaned_text']
+    fetched_data = obsess.fetch_data(data['url'], headers)
+    if fetched_data: # data['raw_html'] data['content_type'] data['page_links'] data['title'] data['cleaned_text']
       data.update(fetched_data)
     else:
       print "Fetching failed, skipping this url."
@@ -79,11 +79,11 @@ else:
 # generating wiki content
     for record in all_entities:
       print "Generating article summary for entity " + record[u'entity'] + " - " + record[u'type']
-      article_summary = ss.summarize(article.cleaned_text, 4, record[u'entity'])
+      article_summary = ss.summarize(data['cleaned_text'], 4, record[u'entity'])
       print "Summary: " + article_summary + "\n\n"
 
       normalized_entity_name = re.sub('\.','',record[u'entity']) #remove periods from acronyms and names to be more consistent in the wiki
-      mwuniquething = url # if this thing already exists on the mwpage, the content will not be appended
+      mwuniquething = data['url'] # if this thing already exists on the mwpage, the content will not be appended
       reddit_title = reddit_post[u'data'][u'title']
       reddit_domain = reddit_post[u'data'][u'domain']
       reddit_permalink = 'http://reddit.com' + reddit_post[u'data'][u'permalink']
@@ -100,7 +100,7 @@ else:
       elif record[u'type'] == 'ORGANIZATION':
         create = "[[category:organizations]]\n"
         valid = True
-      append = "\n\n\n" + reddit_title + "\n* " + url + "\n* Summary: " + article_summary + "\n* Source: [[" + reddit_domain + "]] \n" + "* [" + reddit_permalink + " Discus on Reddit]\n\n"
+      append = "\n\n\n" + reddit_title + "\n* " + data['url'] + "\n* Summary: " + article_summary + "\n* Source: [[" + reddit_domain + "]] \n" + "* [" + reddit_permalink + " Discus on Reddit]\n\n"
       if valid == True:
         proposed_change = {'name':normalized_entity_name,'type':record[u'type'],'unique_attrib':mwuniquething,'create':create,'append':append,'mwaccount':mediawiki_account}
         obsess.log_data(proposed_change, proposed_change_filename)

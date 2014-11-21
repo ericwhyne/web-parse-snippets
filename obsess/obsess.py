@@ -6,6 +6,8 @@ import sys
 import json
 import unicodedata
 import urllib2
+from goose import Goose
+from bs4 import BeautifulSoup
 
 # Next 4 lines are for MITIE
 import os
@@ -59,14 +61,15 @@ def log_data(record, filename):
     logfile.close()
 
 def url_in_log_file(url, filename):
-  logfile = open(filename, 'r')
-  records = json.load(logfile)
-  for record in records:
-    if record["url"] == url:
-      return True
+  if os.path.exists(filename):
+    logfile = open(filename, 'r')
+    records = json.load(logfile)
+    for record in records:
+      if record["url"] == url:
+        return True
   return False
 
-def fetch_data(url):
+def fetch_data(url, headers):
     '''
      Fetches data from a url. Prints message and returns False if failed.
      If successful returns dict data
@@ -81,27 +84,26 @@ def fetch_data(url):
     try:
       req = urllib2.Request(url, None, headers)
       response = urllib2.urlopen(req)
-      data['raw_html'] = = response.read()
+      data['raw_html'] = unicode(response.read(), errors='replace')
       data['content_type'] = response.info().getheader('Content-Type')
-      if 'text' not in content_type:
+      if 'text' not in data['content_type']:
         print "Content type is not text, skipping." + data['content_type']
         return False
       soup = BeautifulSoup(data['raw_html'])
     except:
-      print "Failed to fetch page"
+      print "Failed to fetch page ", sys.exc_info()[0]
       return False
     print "Extracting links..."
     data['page_links'] = []
     for link in soup.find_all('a'):
       data['page_links'].append(link.get('href'))
-    print "Extracting main text..."
+    print "Extracting main text... ", sys.exc_info()[0]
     try:
-      goose_data = goose.extract(raw_html=raw_html)
-      print goose_data.cleaned_text
+      goose_data = goose.extract(raw_html=data['raw_html'])
       data['title'] = goose_data.title
       data['cleaned_text'] = goose_data.cleaned_text
     except:
-      print "Failed to extract text."
+      print "Failed to extract text. ", sys.exc_info()[0]
       return False
     return data
 
@@ -151,7 +153,7 @@ def known_extract_entities(text):
       entities.append(entity)
   return entities
 
-def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount):
+def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount, rejectfilename = 'mediawiki_update_rejects.json'):
   # pname - the page name
   # mwuniquething - if this string is on the mwpage, the content will not be added (eg: url)
   # create - what to add if the page doesn't already exist
@@ -172,12 +174,11 @@ def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount):
         ask_before_edit = "false" # Just make the update if the page of correct type cateogry already exists
     else:
       newpagetxt = oldpagetxt + "\n\n==Recent News==\n\n" + append
-  #print "Checking page for: " + mwuniquething
-  #if re.match('.*' + re.escape(mwuniquething) + '.*', page.text()):
   if mwuniquething in oldpagetxt:
     print "This article was already on the page. Ignoring\n\n"
   else:
-    print "Proposed update: \n" + append + "\n\n"
+    display_append = re.sub(re.escape(pname),bcolors.OKGREEN + pname + bcolors.ENDC,append)
+    print "Proposed update: \n" + display_append + "\n\n"
     if ask_before_edit == "false":
       print bcolors.WARNING + "Unsupervised edit! " + pname + " as " + etype + bcolors.ENDC
       page.save(newpagetxt, summary='automated update')
@@ -186,6 +187,9 @@ def mediawiki_update(pname, etype, mwuniquething, create, append, mwaccount):
       if query_yes_no(bcolors.OKBLUE + "Edit the page?" + bcolors.ENDC):
         print "Editing the page"
         page.save(newpagetxt, summary='automated update')
+      else:
+        log_data({'entity':pname, 'type':etype}, rejectfilename)
+
 
 def query_yes_no(question, default="yes"):
     """Ask a yes/no question via raw_input() and return their answer."""

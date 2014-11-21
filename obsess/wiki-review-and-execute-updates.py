@@ -3,7 +3,7 @@ import json
 import obsess
 
 #mediawiki_account_config = '/home/eric/.ssh/ebola-robot.json'
-filename = 'ebola_wiki_proposed_changes.json'
+filename = 'proposed_changes.json'
 
 logfile = open(filename, 'r')
 records = json.load(logfile)
