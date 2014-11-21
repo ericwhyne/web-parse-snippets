@@ -5,6 +5,7 @@ import mwclient
 import sys
 import json
 import unicodedata
+import urllib2
 
 # Next 4 lines are for MITIE
 import os
@@ -20,6 +21,7 @@ mitie_known_bad_entities_file = "mitie_known_bad_entities.json"
 # Load models
 st = nltk.tag.stanford.NERTagger('lib/english.all.3class.distsim.crf.ser.gz', 'lib/stanford-ner.jar', encoding='utf-8')
 mt = mitie.named_entity_extractor('lib/MITIE/english/ner_model.dat')
+goose = Goose()
 
 class bcolors:
     HEADER = '\033[95m'
@@ -56,13 +58,52 @@ def log_data(record, filename):
     json.dump(records, logfile)
     logfile.close()
 
-def url_not_in_log_file(url, filename):
+def url_in_log_file(url, filename):
   logfile = open(filename, 'r')
   records = json.load(logfile)
   for record in records:
     if record["url"] == url:
+      return True
+  return False
+
+def fetch_data(url):
+    '''
+     Fetches data from a url. Prints message and returns False if failed.
+     If successful returns dict data
+     data['raw_html']
+     data['content_type']
+     data['page_links']
+     data['title']
+     data['cleaned_text']
+    '''
+    print "Fetching web page: " + url
+    data = {}
+    try:
+      req = urllib2.Request(url, None, headers)
+      response = urllib2.urlopen(req)
+      data['raw_html'] = = response.read()
+      data['content_type'] = response.info().getheader('Content-Type')
+      if 'text' not in content_type:
+        print "Content type is not text, skipping." + data['content_type']
+        return False
+      soup = BeautifulSoup(data['raw_html'])
+    except:
+      print "Failed to fetch page"
       return False
-  return True
+    print "Extracting links..."
+    data['page_links'] = []
+    for link in soup.find_all('a'):
+      data['page_links'].append(link.get('href'))
+    print "Extracting main text..."
+    try:
+      goose_data = goose.extract(raw_html=raw_html)
+      print goose_data.cleaned_text
+      data['title'] = goose_data.title
+      data['cleaned_text'] = goose_data.cleaned_text
+    except:
+      print "Failed to extract text."
+      return False
+    return data
 
 def mitie_extract_entities(text):
   if isinstance(text, unicode):

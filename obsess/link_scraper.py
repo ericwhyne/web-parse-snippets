@@ -127,32 +127,42 @@ data_logfilename = 'jihad_scrape.json'
 
 mediawiki_account = json.load(open(mediawiki_account_config))
 ss = summarize.SimpleSummarizer()
+g = Goose()
 
 headers = { 'User-Agent' : 'Magic Browser' }
 for url in urls:
-  if obsess.url_not_in_log_file(url, data_logfilename):
+    #TODO: This function was inverted!!!!!!!!!!!!!!!! fix
+  #if obsess.url_not_in_log_file(url, data_logfilename):
     data = {}
     data['url'] = url
     all_entities = []
     print "\n\n*****************\n"
     print "Fetching web page: " + url
+
     req = urllib2.Request(url, None, headers)
     raw_html = urllib2.urlopen(req).read()
     data['raw_html'] = raw_html
     soup = BeautifulSoup(raw_html)
 
     print "Extracting links..."
-    page_links = []
-    for link in soup.find_all('a'):
-      page_links.append(link.get('href'))
-    data['page_links'] = page_links
-
+    try:
+      page_links = []
+      for link in soup.find_all('a'):
+        page_links.append(link.get('href'))
+      data['page_links'] = page_links
+    except:
+      print "Failed at extracting main text."
+      continue
     print "Extracting main text..."
-    g = Goose()
-    article = g.extract(raw_html=raw_html)
-    title = article.title
-    data['title'] = title
-    data['cleaned_text'] = article.cleaned_text
+    try:
+      article = g.extract(raw_html=raw_html)
+      title = article.title
+      data['title'] = title
+      data['cleaned_text'] = article.cleaned_text
+    except:
+      print "Failed at extracting main text."
+      continue
+
 
     #print "Tagging - Stanford NER..."
     #stanford_title_entities = obsess.stanford_extract_entities(title)
