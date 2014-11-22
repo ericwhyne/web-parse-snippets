@@ -28,7 +28,6 @@ headers = { 'User-Agent' : 'ObsessBot/alphadev' } # reddit heavily throttles def
 req = urllib2.Request(subreddit_url, None, headers)
 text = urllib2.urlopen(req).read()
 reddit_posts = json.loads(text)
-
 # See if it failed
 if re.match('^{\"error.*', text):
   print "Error: " + text
@@ -46,6 +45,8 @@ else:
     else:
       print "Fetching failed, skipping this url."
       continue
+
+
 #########################################################################################################################
 # entity extraction
     all_entities = []

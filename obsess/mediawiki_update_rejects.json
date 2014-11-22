@@ -1,1 +1,1134 @@
-[{"type": "LOCATION", "entity": "North American"}, {"type": "LOCATION", "entity": "North American"}, {"type": "LOCATION", "entity": "North American"}, {"type": "LOCATION", "entity": "North American"}, {"type": "ORGANIZATION", "entity": "Ebola"}, {"type": "PERSON", "entity": "James"}, {"type": "PERSON", "entity": "Docter"}, {"type": "ORGANIZATION", "entity": "United Nations Children 's Fund"}, {"type": "PERSON", "entity": "James"}, {"type": "PERSON", "entity": "James"}, {"type": "LOCATION", "entity": "Children"}, {"type": "PERSON", "entity": "Hans Docter"}, {"type": "PERSON", "entity": "Docter"}, {"type": "ORGANIZATION", "entity": "Invalid CFML"}]
+[
+  {
+    "type": "LOCATION",
+    "entity": "North American"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "North American"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "North American"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "North American"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "United Nations Children 's Fund"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Children"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Hans Docter"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Docter"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Invalid CFML"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "CDC Ebola"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Duncan Tx Ebola"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "NO VIRUS"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "DNA Ebola"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PCR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PCR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Sensitivity"
+  },
+  {
+    "type": "PERSON",
+    "entity": "NPC1"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Defyrus"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Kikwit"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMapp"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMapp"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMapp"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMab"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMapp"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Nicotiana benthamiana"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMab"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EBOV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZMAb"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EBOV"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EBOV-GP"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZMAb"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMab"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Defyrus"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMab"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Mapp"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZMAb"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "chimeric ZMAb"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZMAb"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Kikwit"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EBOV"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EBOV"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Mapp"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMapp"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "TKM-Ebola"
+  },
+  {
+    "type": "PERSON",
+    "entity": "ZMapp"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "] Mapp"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Cochrane"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Eby"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "] Common"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "SMD"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": ">"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Eby"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": ">"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "SMD"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "nausea"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "diarrhea"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "nausea"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "manganese"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Latest in Infectious Diseases Lawmakers Grill"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Texas Healthcare Worker"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola Nurse With Ebola"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola Case Means New Safety Approach"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Common Cold"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "CDC Expands Passenger Notification"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "airline"
+  },
+  {
+    "type": "PERSON",
+    "entity": "gov/vhf/ebola"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "NP"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Tekmira"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola Virus"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Bundibugyo"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Ta"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Filoviridae"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Mononegavirales"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EVD"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Theyre"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "NP"
+  },
+  {
+    "type": "PERSON",
+    "entity": "L The"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Heterogeneous"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Karyopherin"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Whats"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Niemann Pick C1"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Nature"
+  },
+  {
+    "type": "PERSON",
+    "entity": "NPC1"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Ebolas"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Marburg"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "mRNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "NP"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Mononegavirales"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "NP"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "PERSON",
+    "entity": "RNAs"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "mRNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "NP"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Karyopherin Alpha"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola Virus Inhibitor"
+  },
+  {
+    "type": "PERSON",
+    "entity": "RNAi"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Proline Rich"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "PY"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "PY"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "NEDD4"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "PY"
+  },
+  {
+    "type": "PERSON",
+    "entity": "VP40"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "SEC24C"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "COPII"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Sar1p"
+  },
+  {
+    "type": "PERSON",
+    "entity": "GTPase"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Sar1p"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Sar1p"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "PERSON",
+    "entity": "RNAi"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "PERSON",
+    "entity": "RNAi"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "micro RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "miRNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "siRNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "siRNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Alpha/Beta"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RISC"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Viral RNA"
+  },
+  {
+    "type": "PERSON",
+    "entity": "RNAis"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "OAS/RNAseL"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Tekmira"
+  },
+  {
+    "type": "PERSON",
+    "entity": "RNAi"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola Hemorrhagic Fever Transmission"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Onek PA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola Hemorrhagic Fever"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EHF"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EHF"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "immunosorbent"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RT-PCR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "CI"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Municipality"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "IgG"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EHF"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EHF"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EHF"
+  },
+  {
+    "type": "PERSON",
+    "entity": "contrast"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EHF"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Studies"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "PPR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EHF"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EHF"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "EHF"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Onek PA"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Fabiani M"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "DISINFECTANTS"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Ebolavirus"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "DISINFECTANTS"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Ebolavirus"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Footnote"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Ig"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Lake Victoria marburgvirus"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "MARV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZEBOV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZEBOV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "REBOV"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "MARV"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "MARV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Lake Victoria marburgvirus"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "MARV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZEBOV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZEBOV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "REBOV"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "MARV"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "MARV"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "ZEBOV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZEBOV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZEBOV"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "ZEBOV"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "oronasal mucosa"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "ZEBOV"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "DR"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "cRNA"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "RNA"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Michigan"
+  },
+  {
+    "type": "PERSON",
+    "entity": "IVs"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "IVs"
+  },
+  {
+    "type": "PERSON",
+    "entity": "forTexas Health Presbyterian Hospital"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "`Africa"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Tylenol"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Ebola-affected West Africa"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Labor"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "UN System"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "UN Programme"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Council"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "UN Systems"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Executives Board"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "UN Photo/Eskinder Debebe"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Board for Coordination"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola Emergency Response"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Joint UN Programme"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "UN Funds"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Secretary-Generals Special Envoy"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Malis"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Democratic Republic"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Rages"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Lewnard et al "
+  },
+  {
+    "type": "PERSON",
+    "entity": "Ro"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "T"
+  },
+  {
+    "type": "PERSON",
+    "entity": "R"
+  },
+  {
+    "type": "PERSON",
+    "entity": "K"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "September"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Liberia10"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ebola Worker"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Liberias"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "west Africa Ebola"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Stigma"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Malaria"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Gavi"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Piots"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Nongovernmental"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Gavi"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "GlaxoSmithKline , International Federation of Pharmaceutical Manufacturers & Associations , International Federation of Red Cross"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Johnson & Johnsonand"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Britains"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Children ,"
+  },
+  {
+    "type": "PERSON",
+    "entity": "have embarked"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "Aspen"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "International Medical"
+  },
+  {
+    "type": "LOCATION",
+    "entity": "mid December"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "GMP"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Gavi ( The Vaccines Alliance"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Tetanus"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Haemophilus"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "b"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "iPad"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Cllr"
+  },
+  {
+    "type": "PERSON",
+    "entity": "Benedict F Sannoh"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Justice"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "GOL"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Liberia EVD"
+  },
+  {
+    "type": "ORGANIZATION",
+    "entity": "Ministry"
+  }
+]
