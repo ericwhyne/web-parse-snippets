@@ -101,7 +101,7 @@ else:
       elif record[u'type'] == 'ORGANIZATION':
         create = "[[category:organizations]]\n"
         valid = True
-      append = "\n\n\n" + reddit_title + "\n* " + data['url'] + "\n* Summary: " + article_summary + "\n* Source: [[" + reddit_domain + "]] \n" + "* [" + reddit_permalink + " Discus on Reddit]\n\n"
+      append = "\n\n\n" + data['title'] + "\n* " + data['url'] + "\n* Summary: " + article_summary + "\n\n"
       if valid == True:
         proposed_change = {'name':normalized_entity_name,'type':record[u'type'],'unique_attrib':mwuniquething,'create':create,'append':append,'mwaccount':mediawiki_account}
         obsess.log_data(proposed_change, proposed_change_filename)

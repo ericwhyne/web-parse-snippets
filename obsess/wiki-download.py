@@ -3,11 +3,16 @@ import mwclient
 import json
 import obsess
 import datetime
+import sys
 
 today = datetime.date.isoformat(datetime.datetime.now())
 
-mediawiki_account_config = '/home/eric/.ssh/ebola-robot.json'
-data_logfilename = 'ebola-wiki-content-' + today + '.json'
+if len(sys.argv) != 3:
+  print "Usage: ", sys.argv[0], " /home/eric/.ssh/ebola-dev-robot.json outfile.json"
+
+mediawiki_account_config = sys.argv[1]
+data_logfilename = sys.argv[2]
+
 mwaccount = json.load(open(mediawiki_account_config))
 
 mwsite = mwclient.Site(mwaccount['site'], path=mwaccount['sitepath'])

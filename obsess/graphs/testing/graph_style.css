@@ -1,0 +1,15 @@
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+#entity_graph {
+    border: 2px solid;
+    border-radius: 25px;
+}

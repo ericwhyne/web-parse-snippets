@@ -1,0 +1,41 @@
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+#graph_vis {
+    border: 2px solid;
+    border-radius: 25px;
+    width: 800px;
+    background-color: #FFFFFF;
+}
+#graph_controls {
+    border: 2px solid;
+    border-radius: 5px;
+    align: top;
+    height: 600px;
+    width: 600px;
+    overflow: auto;
+    padding: 5px;
+    background-color: #FFFFFF;
+}
+#graph_container {
+    border: 2px solid;
+    border-radius: 5px;
+    width: 1420px;
+    padding: 10px;
+    background-color: #DFDFE9;
+}
+#graph_legend {
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 7px;
+  width: 370px;
+  background-color: #FFFFFF;
+}
