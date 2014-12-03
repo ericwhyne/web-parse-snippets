@@ -1,14 +1,14 @@
 #!/bin/bash
 date=`date --iso`
 epoch=`date +%s`
-wikiaccount="/home/eric/.ssh/ebola-dev-robot.json"
-serverip="54.174.48.45"
+wikiaccount="/home/eric/.ssh/ebola-robot.json"
+serverip="ebola-wiki.com"
 graphdatadir='graph_data/'
 contentfile=data/content/ebola-wiki-dev-content-$date.json
 graphfile=data/content/ebola-wiki-dev-graphs-$date.zip
-#rm -f $contentfile
-#echo downloading content from $wikiaccount to $contentfile
-#./wiki-download.py $wikiaccount $contentfile
+rm -f $contentfile
+echo downloading content from $wikiaccount to $contentfile
+./wiki-download.py $wikiaccount $contentfile
 # Generate sub graphs
 rm $graphdatadir*
 echo generating graph one
@@ -37,7 +37,7 @@ scp -i ~/.ssh/genericworkkey.pem graphs/graph_style.css ubuntu@$serverip:~/apps/
 ssh -i ~/.ssh/genericworkkey.pem ubuntu@$serverip "sed -i 's/graph_style.css.*\"/graph_style.css\?$epoch\"/' ~/apps/mediawiki/htdocs/skins/Vector.php"
 
 
-#scp -i ~/.ssh/genericworkkey.pem graphs/d3.v3.min.js ubuntu@$serverip:~/apps/mediawiki/htdocs/
+scp -i ~/.ssh/genericworkkey.pem graphs/d3.v3.min.js ubuntu@$serverip:~/apps/mediawiki/htdocs/
 
 # ensure graph div exists on each page
 #./wiki-append-graph.py

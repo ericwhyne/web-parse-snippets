@@ -22,7 +22,7 @@ function draw_graph(gdf, svg, file, width, height) {
   file = file.replace(/_/g, ' ') // we don't use spaces on the filesystem but we want them in our human interface text
   console.log("entity at center: " + file)
 
-  var color = d3.scale.category10();
+  //var color = d3.scale.category10();
 
   var force = d3.layout.force()
       .charge(-300)
@@ -45,8 +45,8 @@ function draw_graph(gdf, svg, file, width, height) {
       .data(graph.nodes)
       .enter().append("circle")
       .attr("class", "node")
-      .attr("r", function(d){ console.log(d.num_urls); return d.num_urls * 5;}) //hack here
-      .style("fill", function(d) { return color(d.group); })
+      .attr("r", function(d){ size = d.num_urls * 5; if(size >= 30){size = 30;} return size;}) //hack here
+      .style("fill", function(d) { if(d.group == 1){ return "blue"; } if(d.group == 2){ return "orange"; } if(d.group == 3){ return "green"; }}) //TODO: colors are not consistent across systems/browsers. Define them explicltey.
       .style("cursor","move")
       .call(force.drag);
     console.log("creating labels")
@@ -54,7 +54,7 @@ function draw_graph(gdf, svg, file, width, height) {
       .data(graph.nodes)
       .enter().append("text")
       .attr("class", "label")
-      .attr("fill", function(d) {  if (d.name == file) { return "red";} else{ return d.name;}  })
+      .attr("fill", function(d) {  if (d.name == file) { return "red";} else{ return "black";}  })
       .on("click", function(d) { window.open(d.url,"_self"); })
       .on("mouseover", function(d){
          if (d.name != file) {
@@ -93,8 +93,13 @@ function draw_graph(gdf, svg, file, width, height) {
 } //end of draw graph function
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function setup_graphtool(){
- document.getElementById("entity_graph").innerHTML = "<div id='graph_container'><b>The graph below shows when <a href='/Category:People'>People</a>, <a href='/Category:Locations'>Places</a>, and <a href='/Category:Organizations'>Organizations</a> are mentioned in articles or web pages together.  <button type='button' id='hidebutton' onclick=\"toggle_hide('hide')\">Hide graph tool</button> \
-<hr></b><table><tr><td><div id='graph_vis'></div></td><td><div id='graph_controls'></div></td></tr><tr><td><div id='graph_legend'><img width='350' src='/graph_legend.png'></div></td><td align='right'></td><tr></table></div>";
+ document.getElementById("entity_graph").innerHTML = "\
+<div id='graph_container'><button type='button' id='hidebutton' onclick=\"toggle_hide('hide')\">Hide this tool</button>  \
+<b>The graph below shows when <a href='/Category:People'>People</a>, <a href='/Category:Locations'>Places</a>, and <a href='/Category:Organizations'>Organizations</a> \
+are mentioned in documents, articles, or web pages with this entity.</b>\
+<hr><table><tr><td><div id='graph_vis'></div></td><td><div id='graph_controls'></div></td></tr><tr><td>\
+<div id='graph_legend'><table><tr><td><img width='350' src='/graph_legend.png'></td><td> The size of the node indicates how many external links it is mentioned in.</td></tr></table></div>\
+</td><td align='right'></td><tr></table></div>";
 
  document.getElementById("graph_controls").innerHTML = "<p><b>Use this selection to configure the graph. Requiring a higher number of concurrent mentions will result in fewer nodes on the graph which are more strongly correlated to each other.</b></p> \
   Graph links are based on <select id='graph_structure'> \
@@ -118,7 +123,6 @@ function setup_graphtool(){
  var graph_structure = e.options[e.selectedIndex].value;
  var file = document.getElementById("entity_graph").getAttribute("file")
  var graph_data_file = "graph_data/" + file + "-" + graph_structure + ".json";
-
  var width = 800,
     height = 600;
 
@@ -135,6 +139,7 @@ function setup_graphtool(){
   var e = document.getElementById("graph_structure");
   var graph_structure = e.options[e.selectedIndex].value;
   var file = document.getElementById("entity_graph").getAttribute("file")
+
   sessionStorage.setItem('graph_structure',graph_structure);
   graph_data_file = "graph_data/" + file + "-" + graph_structure + ".json";
   d3.selectAll("svg > *").remove(); // removes all elements below svg

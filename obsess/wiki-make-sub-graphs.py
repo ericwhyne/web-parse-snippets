@@ -21,6 +21,10 @@ graph['nodes'] = []
 graph['links'] = []
 for record in records:
     urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', record['text'])
+    for url in urls:
+      if "maps.google.com" in url:
+        urls.remove(url)
+        print "Removed ", url
     if '[[category:organizations]]' in record['text']:
       graph['nodes'].append({"name":record['title'],"group":"1","urls":urls})
     if '[[category:locations]]' in record['text']:

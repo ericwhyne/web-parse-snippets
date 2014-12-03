@@ -3,8 +3,7 @@ import mwclient
 import json
 import re
 
-# DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV DEV
-mediawiki_account_config = '/home/eric/.ssh/ebola-dev-robot.json'
+mediawiki_account_config = '/home/eric/.ssh/ebola-robot.json'
 
 mwaccount = json.load(open(mediawiki_account_config))
 
@@ -16,16 +15,12 @@ for page in mwsite.pages:
     oldpagetext = page.text()
     fileprefix =  re.sub('[ /]','_',page.page_title)
     if '[[category:organizations]]' in oldpagetext or '[[category:locations]]' in oldpagetext or '[[category:people]]' in oldpagetext:
-      print "Editing ", fileprefix, "\n\n\n"
-      entity_graph = """
-      <!-- entity_graph_begin -->
-      <div id='entity_graph' file='%s'></div>
-      <div id='entity_graph_menu'></div>
-      <!-- entity_graph_end -->
-      """ % fileprefix
+      print "Editing ", fileprefix
+      entity_graph = """<div id='entity_graph' file='%s'></div>""" % fileprefix
 
-      if "<!--entity_graph_begin-->" in oldpagetext: # Strip the old graph if it exists
-        oldpagetext = re.sub(re.escape('<!--entity_graph_begin-->') + '.*' + re.escape('<!--entity_graph_end-->'),'',oldpagetext)
+      if "<div id='entity_graph'" in oldpagetext:
+        entity_graph = "" # do something else, usually nothing
+        print "Skipping ", fileprefix
 
       newpagetext = entity_graph + oldpagetext
 
