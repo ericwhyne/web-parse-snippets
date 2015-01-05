@@ -97,7 +97,7 @@ def fetch_data(url, headers):
     data['page_links'] = []
     for link in soup.find_all('a'):
       data['page_links'].append(link.get('href'))
-    print "Extracting main text... ", sys.exc_info()[0]
+    print "Extracting main text... "
     try:
       goose_data = goose.extract(raw_html=data['raw_html'])
       data['title'] = goose_data.title

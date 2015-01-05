@@ -1,0 +1,5 @@
+Add 'file', to line 1530 array in Sanitize.php to allow file attribute on page div elements.
+
+Front slashes are a problem.
+
+append the hooks to skins/vector.php
