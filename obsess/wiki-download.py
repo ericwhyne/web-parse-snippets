@@ -19,3 +19,9 @@ for page in mwsite.pages:
     record['text'] = page.text()
     #print record
     obsess.log_data(record, data_logfilename)
+
+mwsite.upload(open(data_logfilename), data_logfilename, 'Ebola-wiki.com pages as of ' + today)
+datapage = mwsite.Pages['Ebola-wiki data']
+oldpagetxt = page.text()
+newpagetext = re.sub(re.escape('==Files=='),'==Files==\n*[[File:' + data_logfilename + ']]\n',oldpagetxt)
+datapage.save(newpagetxt, summary='automated update')

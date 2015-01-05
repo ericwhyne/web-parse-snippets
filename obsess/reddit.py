@@ -8,9 +8,9 @@ from collections import defaultdict
 
 #########################################################################################################################
 # Configuration
-subreddit_url = "http://api.reddit.com/r/ebola"
+#subreddit_url = "http://api.reddit.com/r/ebola"
 #subreddit_url = "http://api.reddit.com/r/EbolaNewsBot/"
-#subreddit_url = "http://api.reddit.com/r/EbolaGooglers"
+subreddit_url = "http://api.reddit.com/r/EbolaGooglers"
 #subreddit_url = "http://api.reddit.com/r/ebolasurvival"
 #subreddit_url = "http://api.reddit.com/r/ebolawestafrica"
 #subreddit_url = "http://api.reddit.com/r/ebolaUS
